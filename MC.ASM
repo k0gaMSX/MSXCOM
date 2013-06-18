@@ -2,7 +2,7 @@
 %include "z80().inc"
 %include "tniasm.inc"
 
-%OUTFILE    "DISK\MC.COM"
+%OUTFILE    "DISK/MC.COM"
 %SYMFILE	"mc.sym"
 %ORG		$100
 
