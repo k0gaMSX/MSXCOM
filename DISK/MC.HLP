@@ -71,6 +71,7 @@ ENTER         : Enter a directory / execute item
 CTRL+ENTER    : Enter a directory on opposite view
 CTRL+BACKSPACE: Go to parent directory
 SELECT        : Select a file
+INSERT        : Insert name of actual file in command line
 +             : Select all files
 -             : Unselect all files
 *             : Invert all files selection

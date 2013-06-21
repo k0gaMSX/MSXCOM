@@ -1423,7 +1423,7 @@ VIEW_UPDATE:
 	PUSH	IX
 	CALL	UPDATE_CONSOLE_PATH
 	POP		IX
-		
+
 	SCF
 	RET
 .KEYPRESS:
@@ -1449,6 +1449,8 @@ VIEW_UPDATE:
 	JP		Z,.EXEC
 	CP		$18
 	JP		Z,.SELECT
+	CP		$12
+	JP		Z,.INSERT
 	CP		'+'
 	JP		Z,.SELECT_ALL
 	CP		'-'
@@ -1457,6 +1459,26 @@ VIEW_UPDATE:
 	JP		Z,.INVERT_ALL
 	OR		A
 	RET
+.INSERT:
+	CALL            VIEW_FIND_SELECTED_ITEM
+	RET             NC
+
+	PUSH            IY
+	POP             HL
+	LD		IX,CONSOLE_INPUT
+	LD              DE,VIEW_ITEM_FILENAME
+	ADD             HL,DE
+.LOOP:	LD              A,(HL)
+	OR              A
+	RET             Z
+	PUSH            HL
+	LD		E,A
+	LD		A,KEYPRESS_EVENT
+	LD		D,0
+	CALL		TEXT_BOX_UPDATE
+	POP             HL
+	INC             HL
+	JP              .LOOP
 .INVERT_ALL:
 	LD		A,0
 	LD		(FAST_DRAW),A
